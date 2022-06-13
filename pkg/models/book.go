@@ -1,8 +1,10 @@
 package models
 
 import (
+	"fmt"
+
 	"github.com/SamuG2/go-bookstore/pkg/config"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 var db *gorm.DB
@@ -21,7 +23,7 @@ func init() {
 }
 
 func CreateBook(b *Book) *Book {
-	db.NewRecord(b)
+	//db.NewRecord(b)
 	db.Create(&b)
 	return b
 }
@@ -46,6 +48,8 @@ func GetBookById(Id int64) (*Book, *gorm.DB) {
 
 func DeleteBook(Id int64) Book {
 	var book Book
-	db.Where("ID=?", Id).Delete(book)
+	fmt.Println("ID:", Id)
+	db.Where("ID=?", Id).Delete(&book)
+	fmt.Printf("%+v", book)
 	return book
 }
