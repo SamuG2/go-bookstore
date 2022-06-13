@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mysql_bookstore_go:
+    image: mysql:5.7
+    container_name: mysql_bookstore_go
+    environment:
+      - MYSQL_DATABASE=bookstore
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
+      - MYSQL_ROOT_PASSWORD=pass
+      - TZ=Europe/Madrid
+    ports:
+      - '3310:3306'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500k"
+        max-file: "3"
